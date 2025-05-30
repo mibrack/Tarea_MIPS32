@@ -1,0 +1,100 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+
+\title{Resumen: Evolución de la Computación y Arquitectura MIPS 32}
+\author{Mike Gonzalez - 30281540}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introducción a la Computación}
+Desde sus inicios, la computación ha sido uno de los pilares fundamentales en el desarrollo tecnológico y social. La industria de las tecnologías de la información ha evolucionado rápidamente, impactando desde el ámbito científico hasta el cotidiano.
+
+\subsection{Innovación y Avance Tecnológico}
+La industria de los computadores se ha caracterizado por una constante innovación acelerada. Cada generación de hardware ha llevado a mejoras significativas en rendimiento y reducción de costos, permitiendo la aparición de nuevas aplicaciones. A lo largo de las décadas, la computación ha influenciado diversas áreas:
+\begin{itemize}
+    \item \textbf{Automóviles}: Implementación de microprocesadores para gestión de motores y sistemas de seguridad.
+    \item \textbf{Telefonía móvil}: Expansión de la conectividad global gracias al desarrollo de sistemas embebidos y redes eficientes.
+    \item \textbf{Genómica}: Reducción de costos para el análisis de ADN mediante la computación avanzada.
+    \item \textbf{Internet}: Surgimiento de herramientas como la World Wide Web y motores de búsqueda, revolucionando el acceso a la información.
+\end{itemize}
+
+\subsection{Tipos de Computadores}
+Los computadores han evolucionado en diferentes formas y propósitos:
+\begin{itemize}
+    \item \textbf{Computadores de sobremesa}: Uso personal con software generalizado.
+    \item \textbf{Servidores}: Sistemas diseñados para manejar cargas pesadas en redes y procesamiento de datos.
+    \item \textbf{Supercomputadores}: Computadores de alto rendimiento utilizados en cálculos científicos avanzados.
+    \item \textbf{Computadores embebidos}: Integrados en dispositivos electrónicos para tareas específicas, como teléfonos y automóviles.
+\end{itemize}
+
+\section{Arquitectura MIPS 32}
+MIPS 32 es una arquitectura basada en el diseño RISC (Reduced Instruction Set Computing), optimizando la eficiencia del procesamiento mediante un conjunto reducido de instrucciones.
+
+\subsection{Registros en MIPS 32}
+Los registros juegan un papel fundamental en la manipulación de datos dentro de la arquitectura. Algunos de los principales registros incluyen:
+\begin{itemize}
+    \item \textbf{\texttt{\$zero}}: Registro constante con valor 0.
+    \item \textbf{\texttt{\$at}}: Utilizado por el ensamblador.
+    \item \textbf{\texttt{\$t0 - \$t9}}: Registros temporales para cálculos intermedios.
+    \item \textbf{\texttt{\$s0 - \$s7}}: Valores que se deben conservar entre llamadas de funciones.
+    \item \textbf{\texttt{\$gp, \$fp, \$sp, \$ra}}: Registros de propósito específico para gestión de memoria y flujo de ejecución.
+\end{itemize}
+
+\subsection{Organización de Memoria en MIPS 32}
+La memoria en MIPS se organiza en direcciones de bytes, con estructuras alineadas en palabras de 4 bytes. Las instrucciones de carga y almacenamiento permiten el acceso eficiente a los datos.
+
+\subsection{Conjunto de Instrucciones en MIPS 32}
+Las instrucciones en MIPS 32 se dividen en varias categorías:
+
+\subsubsection{Instrucciones Aritméticas}
+\begin{itemize}
+    \item \textbf{Suma}: `add \$s1, \$s2, \$s3` → Calcula la suma de `\$s2` y `\$s3`, almacenando el resultado en `\$s1`.
+    \item \textbf{Resta}: `sub \$s1, \$s2, \$s3` → Resta `\$s2` y `\$s3`, guardando el resultado en `\$s1`.
+    \item \textbf{Suma inmediata}: `addi \$s1, \$s2, 100` → Suma un valor constante a `\$s2`.
+\end{itemize}
+
+\subsubsection{Instrucciones de Transferencia de Datos}
+\begin{itemize}
+    \item \textbf{Cargar palabra}: `lw \$s1, 100(\$s2)` → Obtiene un valor de memoria y lo guarda en `\$s1`.
+    \item \textbf{Guardar palabra}: `sw \$s1, 100(\$s2)` → Almacena el valor de `\$s1` en memoria.
+\end{itemize}
+
+\subsubsection{Instrucciones Lógicas}
+\begin{itemize}
+    \item \textbf{AND bit-a-bit}: `and \$s1, \$s2, \$s3` → Operación lógica entre `\$s2` y `\$s3`.
+    \item \textbf{OR bit-a-bit}: `or \$s1, \$s2, \$s3` → Aplica OR lógico entre `\$s2` y `\$s3`.
+\end{itemize}
+
+\subsubsection{Control de Flujo}
+\begin{itemize}
+    \item \textbf{Saltos condicionales}: `beq \$s1, \$s2, etiqueta` → Salto si `\$s1 == \$s2`.
+    \item \textbf{Saltos incondicionales}: `j etiqueta` → Salta a la dirección indicada.
+\end{itemize}
+
+\section{Ejemplo de Código en MIPS}
+\begin{lstlisting}
+  .data
+mensaje: .asciiz "Hola Mundo"
+
+.text
+.globl main
+main:
+    # Imprimir cadena
+    li $v0, 4         # Código de syscall para imprimir una cadena
+    la $a0, mensaje   # Cargar direccion del mensaje
+    syscall           # Llamar a la syscall
+
+    # Finalizar el programa
+    li $v0, 10        # Código de syscall para terminar la ejecucion
+    syscall
+
+\end{lstlisting}
+
+\end{document}
